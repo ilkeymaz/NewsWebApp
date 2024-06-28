@@ -1,0 +1,133 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap News Site</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-o">
+        <div class="container">
+
+            <a class="navbar-brand" href="scratch.html">News</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <button class="nav-link active" aria-current="page" href="#">Anasayfa
+                        </button>
+                    </li>
+
+                    <div class="NewsEdit">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Dropdown
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="addNews.html">Add News</a></li>
+
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Edit News</a></li>
+                            </ul>
+                        </li>
+                    </div>
+                </ul>
+
+                <div class="container">
+                    <form class="d-flex" role="search" action="ara.html" method="GET">
+                        <!--fecth yok ara.html sayfasında-->
+
+                        <input class="form-control me-2" name="keyword" type="search" placeholder="Search"
+                            aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                    <div id="searchResults" class="list-group"></div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <table class="table table-success table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Content</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Actions</th>
+                </tr>
+
+            </thead>
+            <tbody id="allNews">
+
+            </tbody>
+        </table>
+    </div>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.3/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.14/js/bootstrap-select.min.js"></script>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        fetchAllNews();
+    });
+
+    function fetchAllNews() {
+        fetch('http://localhost:8080/news')
+            .then(response => response.json())
+            .then(data => {
+                const haberlerDiv = document.querySelector('#allNews');
+                haberlerDiv.innerHTML = ''; // Clear any existing data
+
+                data.forEach(item => {
+                    const div = document.createElement('tr');
+                    div.innerHTML = `
+                            <th scope="row">${item.id}</th>
+                            <td>${item.title}</td>
+                            <td>${item.content.substring(0, 200)}</td>
+                            <td>${item.date}</td>
+                            <td>
+                                <button class="btn btn-secondary btn-sm edit-btn" onclick="editNews(${item.id})">Düzenle</button>
+                                <button class="btn btn-danger btn-sm delete-btn" onclick="deleteNews(${item.id})">Sil</button>
+                            </td>
+                        `;
+                    haberlerDiv.appendChild(div);
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    }
+
+
+    function editNews(id) {
+        window.location.href = `updateNews.html?id=${id}`;
+    }
+
+    function deleteNews(id) {
+        // Implement delete functionality here
+    }
+
+</script>
+
+</html>

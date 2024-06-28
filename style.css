@@ -1,0 +1,84 @@
+.btn-transparent {
+    background-color: transparent;
+    border: 1px solid #007bff;
+    color: #007bff;
+}
+
+
+.btn-transparent:hover {
+    background-color: rgba(242, 185, 114, 255);
+}
+
+.list-group-item {
+    position: relative;
+    padding-bottom: 4rem;
+}
+
+.list-group-item .d-flex.justify-content-end {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+}
+
+.foto-grup {
+    display: flex;
+    justify-content: center;
+}
+
+.foto-grup div {
+    text-align: center;
+    margin: 0 10px;
+}
+
+.foto-grup img {
+    width: 150px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.bg-body-orange {
+    background-color: transparent;
+    color: white;
+}
+
+.form-control {
+    background-color: white !important;
+    color: black;
+}
+
+
+.btn-outline-success {
+    color: white;
+    border-color: red;
+}
+
+body {
+    background-image: url('https://i.pinimg.com/236x/a1/11/00/a1110071093e75b77ccea51a8c4273c3.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+.btn {
+    display: inline-block;
+    margin-right: 5px;
+    /* Butonlar arasında boşluk bırakmak için */
+}
+
+.view-btn {
+    background-color: green;
+    border-color: green;
+}
+
+.edit-btn {
+    background-color: yellow;
+    border-color: yellow;
+    color: black;
+    /* Sarı arka planda metnin görünmesi için */
+}
+
+.delete-btn {
+    background-color: red;
+    border-color: red;
+}
